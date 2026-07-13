@@ -15,7 +15,7 @@ export default function Navbar() {
         Karat<span className="text-gold">·</span>Club
       </Link>
       <nav className="flex items-center gap-6 text-xs tracking-[0.2em] uppercase">
-        <Link href="/#collection" className="text-ivory-dim transition-colors duration-200 hover:text-gold">
+        <Link href="/#collection" className="hidden text-ivory-dim transition-colors duration-200 hover:text-gold sm:inline-block">
           Collection
         </Link>
         {status === "authenticated" ? (
