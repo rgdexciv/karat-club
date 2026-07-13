@@ -70,14 +70,14 @@ function Ring() {
         {/* Bezel-set stone */}
         <mesh position={[0, 0.88, 0]} rotation={[Math.PI / 2, 0, 0]}>
           <octahedronGeometry args={[0.17, 0]} />
-          <meshPhysicalMaterial
-            color="#fefcf6"
-            metalness={0}
-            roughness={0.02}
-            transmission={0.92}
-            thickness={0.6}
-            ior={2.4}
-            envMapIntensity={2}
+          {/* Transmission renders flat white over the alpha canvas (nothing
+              behind it to refract), so the stone reads as polished metal
+              instead — deterministic on mobile GPUs. */}
+          <meshStandardMaterial
+            color="#e8d9ae"
+            metalness={1}
+            roughness={0.12}
+            envMapIntensity={1.8}
           />
         </mesh>
         {/* Bezel collar */}

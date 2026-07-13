@@ -7,7 +7,7 @@ export default function Navbar() {
   const { data: session, status } = useSession();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 md:px-16">
+    <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-ivory/5 bg-onyx/75 px-6 py-5 backdrop-blur-md md:px-16">
       <Link
         href="/"
         className="font-display text-xl tracking-wide text-ivory"
