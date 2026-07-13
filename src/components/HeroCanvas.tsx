@@ -10,7 +10,7 @@ export default function HeroCanvas() {
     <div className="fixed inset-0 -z-10 bg-onyx" aria-hidden="true">
       <video
         className="h-full w-full object-cover"
-        src="/hero_clean.mp4"
+        src="/hero_loop.mp4"
         poster="/hero-poster.jpg"
         autoPlay
         loop
