@@ -80,7 +80,7 @@ export default function HomePage() {
       </section>
 
       {/* Manifesto */}
-      <section className="relative bg-onyx-soft px-6 py-40 md:px-16">
+      <section className="relative bg-jade/15 px-6 py-40 md:px-16">
         <blockquote className="font-display mx-auto max-w-3xl text-center text-3xl leading-snug font-medium md:text-5xl">
           “Jewelry should not be
           <em className="text-gold italic"> merchandise</em>. It should be a
@@ -92,7 +92,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="relative bg-onyx px-6 py-32 text-center md:px-16">
+      <section className="relative bg-jade/15 px-6 py-32 text-center md:px-16">
         <h2 className="font-display text-4xl font-medium md:text-6xl">
           The next run opens soon.
         </h2>
