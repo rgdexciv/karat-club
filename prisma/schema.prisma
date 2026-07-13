@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  orders       Order[]
+
+  @@map("users")
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  name        String
+  description String
+  // Price stored in centavos (PHP minor units) to avoid float errors
+  priceCents  Int
+  currency    String      @default("PHP")
+  karat       Int         @default(18)
+  material    String      @default("gold")
+  imageUrl    String?
+  modelUrl    String?
+  stock       Int         @default(0)
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  orderItems  OrderItem[]
+
+  @@map("products")
+}
+
+enum OrderStatus {
+  PENDING
+  AWAITING_PAYMENT
+  PAID
+  FAILED
+  CANCELLED
+  FULFILLED
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
+  status      OrderStatus @default(PENDING)
+  totalCents  Int
+  currency    String      @default("PHP")
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  items       OrderItem[]
+  payment     Payment?
+
+  @@index([userId])
+  @@map("orders")
+}
+
+model OrderItem {
+  id             String  @id @default(cuid())
+  orderId        String
+  order          Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId      String
+  product        Product @relation(fields: [productId], references: [id])
+  quantity       Int
+  // Snapshot of unit price at purchase time
+  unitPriceCents Int
+
+  @@index([orderId])
+  @@map("order_items")
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+model Payment {
+  id                      String        @id @default(cuid())
+  orderId                 String        @unique
+  order                   Order         @relation(fields: [orderId], references: [id])
+  paymongoPaymentIntentId String        @unique
+  paymongoPaymentId       String?
+  status                  PaymentStatus @default(PENDING)
+  amountCents             Int
+  currency                String        @default("PHP")
+  paymentMethod           String? // card | gcash | paymaya
+  failureReason           String?
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+
+  @@index([paymongoPaymentIntentId])
+  @@map("payments")
+}

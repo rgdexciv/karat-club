@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  /* Onyx & champagne — Karat Club palette */
+  --color-onyx: #0c0b09;
+  --color-onyx-soft: #161411;
+  --color-ivory: #f2ede4;
+  --color-ivory-dim: #b8b0a2;
+  --color-gold: #d4af5e;
+  --color-gold-deep: #9a7b34;
+  --color-line: #2a261f;
+
+  --font-display: var(--font-cormorant), "Cormorant", serif;
+  --font-body: var(--font-montserrat), "Montserrat", sans-serif;
+}
+
+html {
+  background: var(--color-onyx);
+  color: var(--color-ivory);
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-onyx);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+/* Visible focus for keyboard nav */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* Lenis recommended styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
