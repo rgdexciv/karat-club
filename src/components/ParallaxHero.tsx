@@ -20,44 +20,63 @@ export default function ParallaxHero() {
     const root = rootRef.current;
     if (!root) return;
 
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: root,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-        onUpdate: (self) => {
-          scrollState.progress = self.progress;
-        },
-      });
+    const mm = gsap.matchMedia(root);
 
-      const timeline = gsap.timeline({
-        scrollTrigger: {
+    // On mobile both acts span nearly the full width at overlapping bottom
+    // offsets, so act 2 must exit before act 3 enters; on desktop they sit
+    // left/right and stay visible together.
+    mm.add(
+      { isMobile: "(max-width: 767px)", isDesktop: "(min-width: 768px)" },
+      (context) => {
+        const { isMobile } = context.conditions as { isMobile: boolean };
+
+        ScrollTrigger.create({
           trigger: root,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.6,
-        },
-      });
+          scrub: true,
+          onUpdate: (self) => {
+            scrollState.progress = self.progress;
+          },
+        });
 
-      timeline
-        .to("[data-hero-title]", { yPercent: -35, opacity: 0.1, ease: "none" }, 0)
-        .to("[data-hero-meta]", { yPercent: -120, ease: "none" }, 0)
-        .fromTo(
-          "[data-hero-act='2']",
-          { opacity: 0, y: 80 },
-          { opacity: 1, y: 0, ease: "power2.out" },
-          0.25,
-        )
-        .fromTo(
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: root,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.6,
+          },
+        });
+
+        timeline
+          .to("[data-hero-title]", { yPercent: -35, opacity: 0.1, ease: "none" }, 0)
+          .to("[data-hero-meta]", { yPercent: -120, ease: "none" }, 0)
+          .fromTo(
+            "[data-hero-act='2']",
+            { opacity: 0, y: 80 },
+            { opacity: 1, y: 0, ease: "power2.out" },
+            0.25,
+          );
+
+        if (isMobile) {
+          timeline.to(
+            "[data-hero-act='2']",
+            { opacity: 0, y: -60, ease: "power2.in" },
+            0.48,
+          );
+        }
+
+        timeline.fromTo(
           "[data-hero-act='3']",
           { opacity: 0, y: 80 },
           { opacity: 1, y: 0, ease: "power2.out" },
           0.62,
         );
-    }, root);
+      },
+    );
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
