@@ -49,30 +49,43 @@ export default function ParallaxHero() {
           },
         });
 
+        // Each act owns a non-overlapping slice of the scroll so only one
+        // headline is on screen at a time. Positions/durations are in
+        // timeline-seconds; ScrollTrigger's scrub maps scroll 0→1 onto them.
         timeline
-          .to("[data-hero-title]", { yPercent: -35, opacity: 0.1, ease: "none" }, 0)
-          .to("[data-hero-meta]", { yPercent: -120, ease: "none" }, 0)
+          .to("[data-hero-title]", { yPercent: -35, opacity: 0, ease: "none", duration: 0.18 }, 0)
+          .to("[data-hero-meta]", { yPercent: -120, opacity: 0, ease: "none", duration: 0.18 }, 0)
           .fromTo(
             "[data-hero-act='2']",
             { opacity: 0, y: 80 },
-            { opacity: 1, y: 0, ease: "power2.out" },
-            0.25,
+            { opacity: 1, y: 0, ease: "power2.out", duration: 0.18 },
+            0.22,
           );
 
         if (isMobile) {
-          timeline.to(
-            "[data-hero-act='2']",
-            { opacity: 0, y: -60, ease: "power2.in" },
-            0.48,
+          // Mobile: act 2 must fully clear before act 3 enters — they share
+          // the same vertical band and would otherwise collide.
+          timeline
+            .to(
+              "[data-hero-act='2']",
+              { opacity: 0, y: -60, ease: "power2.in", duration: 0.18 },
+              0.5,
+            )
+            .fromTo(
+              "[data-hero-act='3']",
+              { opacity: 0, y: 80 },
+              { opacity: 1, y: 0, ease: "power2.out", duration: 0.18 },
+              0.72,
+            );
+        } else {
+          // Desktop: acts sit left/right, so they can coexist.
+          timeline.fromTo(
+            "[data-hero-act='3']",
+            { opacity: 0, y: 80 },
+            { opacity: 1, y: 0, ease: "power2.out", duration: 0.2 },
+            0.6,
           );
         }
-
-        timeline.fromTo(
-          "[data-hero-act='3']",
-          { opacity: 0, y: 80 },
-          { opacity: 1, y: 0, ease: "power2.out" },
-          0.62,
-        );
       },
     );
 
