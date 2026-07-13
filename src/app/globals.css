@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* Onyx & champagne — Karat Club palette */
-  --color-onyx: #0c0b09;
-  --color-onyx-soft: #161411;
-  --color-ivory: #f2ede4;
-  --color-ivory-dim: #b8b0a2;
-  --color-gold: #d4af5e;
-  --color-gold-deep: #9a7b34;
-  --color-line: #2a261f;
+  /* Imperial jade & gold — Karat Club palette */
+  --color-onyx: #05130d;
+  --color-onyx-soft: #0c231a;
+  --color-ivory: #f4efe1;
+  --color-ivory-dim: #9db0a5;
+  --color-gold: #d8b45a;
+  --color-gold-deep: #9c7c34;
+  --color-jade: #1f9268;
+  --color-jade-deep: #0f5c42;
+  --color-line: #1c3a2c;
 
   --font-display: var(--font-cormorant), "Cormorant", serif;
   --font-body: var(--font-montserrat), "Montserrat", sans-serif;

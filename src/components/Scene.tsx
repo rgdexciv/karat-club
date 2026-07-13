@@ -67,17 +67,19 @@ function Ring() {
             envMapIntensity={1.6}
           />
         </mesh>
-        {/* Bezel-set stone */}
+        {/* Bezel-set jade cabochon */}
         <mesh position={[0, 0.88, 0]} rotation={[Math.PI / 2, 0, 0]}>
           <octahedronGeometry args={[0.17, 0]} />
-          {/* Transmission renders flat white over the alpha canvas (nothing
-              behind it to refract), so the stone reads as polished metal
-              instead — deterministic on mobile GPUs. */}
+          {/* Imperial-jade stone: low metalness with a bright sheen and a
+              soft internal glow so it reads as polished jade, not metal,
+              over the alpha canvas. */}
           <meshStandardMaterial
-            color="#e8d9ae"
-            metalness={1}
-            roughness={0.12}
-            envMapIntensity={1.8}
+            color="#1f9268"
+            metalness={0.1}
+            roughness={0.15}
+            emissive="#0f5c42"
+            emissiveIntensity={0.35}
+            envMapIntensity={2}
           />
         </mesh>
         {/* Bezel collar */}
@@ -130,7 +132,7 @@ export default function Scene() {
               position={[4, -1, -1]}
               rotation-y={-Math.PI / 2}
               scale={[4, 1, 1]}
-              color="#d9c8ff"
+              color="#7fe6bd"
             />
           </Environment>
         </Suspense>
