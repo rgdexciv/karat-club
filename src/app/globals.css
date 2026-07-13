@@ -39,6 +39,14 @@ h3 {
   text-wrap: balance;
 }
 
+/* Hero copy sits over a bright, moving product film. This shadow keeps it
+   legible on any frame — including the gold emphasis over the gold ring. */
+.hero-legible {
+  text-shadow:
+    0 1px 24px rgba(5, 19, 13, 0.6),
+    0 1px 4px rgba(5, 19, 13, 0.75);
+}
+
 /* Visible focus for keyboard nav */
 :focus-visible {
   outline: 2px solid var(--color-gold);

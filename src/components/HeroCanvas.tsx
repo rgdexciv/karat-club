@@ -34,7 +34,7 @@ export default function HeroCanvas() {
         playsInline
         preload="auto"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-onyx/40 via-onyx/20 to-onyx/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-onyx/50 via-onyx/45 to-onyx/75" />
     </div>
   );
 }

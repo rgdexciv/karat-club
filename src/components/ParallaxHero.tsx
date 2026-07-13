@@ -96,7 +96,7 @@ export default function ParallaxHero() {
     <div ref={rootRef} className="relative h-[300vh]">
       {/* Act I — pinned viewport content */}
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden px-6 md:px-16">
-        <div data-hero-title className="max-w-4xl">
+        <div data-hero-title className="hero-legible max-w-4xl">
           <p className="mb-6 font-body text-xs tracking-[0.35em] text-gold uppercase">
             Karat Club — Manila
           </p>
@@ -109,7 +109,7 @@ export default function ParallaxHero() {
 
         <div
           data-hero-meta
-          className="absolute right-6 bottom-24 hidden max-w-55 text-right md:block"
+          className="hero-legible absolute right-6 bottom-24 hidden max-w-55 text-right md:block"
         >
           <p className="text-sm leading-relaxed text-ivory-dim">
             Hand-finished 18k pieces, cast in small runs. No restocks, no
@@ -120,7 +120,7 @@ export default function ParallaxHero() {
         {/* Act II */}
         <div
           data-hero-act="2"
-          className="absolute bottom-1/3 left-6 max-w-md opacity-0 md:left-16"
+          className="hero-legible absolute bottom-1/3 left-6 max-w-md opacity-0 md:left-16"
         >
           <h2 className="font-display text-3xl font-medium md:text-4xl">
             Cast, not stamped.
@@ -134,7 +134,7 @@ export default function ParallaxHero() {
         {/* Act III */}
         <div
           data-hero-act="3"
-          className="absolute right-6 bottom-1/4 max-w-md text-right opacity-0 md:right-16"
+          className="hero-legible absolute right-6 bottom-1/4 max-w-md text-right opacity-0 md:right-16"
         >
           <h2 className="font-display text-3xl font-medium md:text-4xl">
             Members first.
