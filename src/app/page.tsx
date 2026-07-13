@@ -38,7 +38,7 @@ export default function HomePage() {
       {/* Collection — asymmetric editorial column layout */}
       <section
         id="collection"
-        className="relative bg-onyx px-6 py-32 md:px-16"
+        className="relative bg-jade/15 px-6 py-32 md:px-16"
       >
         <div className="mb-20 flex flex-wrap items-end justify-between gap-6">
           <h2 className="font-display max-w-xl text-4xl font-medium md:text-6xl">
